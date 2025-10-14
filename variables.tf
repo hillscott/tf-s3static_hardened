@@ -13,5 +13,13 @@ variable "common_tags" {
 }
 
 variable "alerts_email" {
+  type        = string
   description = "Where alerts regarding unusual actions in your AWS account should go."
+}
+
+variable "price_class" {
+  type        = string
+  description = "CloudFront Distribution pricing class aka where your site will be cached."
+  # PriceClass_100 is used for N America
+  default = "PriceClass_100"
 }

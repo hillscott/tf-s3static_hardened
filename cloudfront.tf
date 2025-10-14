@@ -13,12 +13,12 @@ resource "aws_cloudfront_distribution" "website-cf" {
     origin_access_control_id = aws_cloudfront_origin_access_control.oac.id
     origin_id                = aws_s3_bucket.web_bucket.id
   }
-  enabled                  = true
-  is_ipv6_enabled          = true
-  default_root_object      = "index.html"
-  aliases                  = ["${var.domain_name}", "www.${var.domain_name}"]
-  price_class              = "PriceClass_100"
-  tags                     = var.common_tags
+  enabled             = true
+  is_ipv6_enabled     = true
+  default_root_object = "index.html"
+  aliases             = ["${var.domain_name}", "www.${var.domain_name}"]
+  price_class         = var.price_class
+  tags                = var.common_tags
   default_cache_behavior {
     allowed_methods = ["GET", "HEAD"]
     cached_methods  = ["GET", "HEAD"]
@@ -35,8 +35,8 @@ resource "aws_cloudfront_distribution" "website-cf" {
     }
   }
   viewer_certificate {
-    acm_certificate_arn = aws_acm_certificate.web_cert.arn
-    ssl_support_method  = "sni-only"
+    acm_certificate_arn      = aws_acm_certificate.web_cert.arn
+    ssl_support_method       = "sni-only"
     minimum_protocol_version = "TLSv1.2_2018"
   }
 }
