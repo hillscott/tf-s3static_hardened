@@ -1,0 +1,34 @@
+# Create Route53 records for the CloudFront distribution aliases
+resource "aws_route53_zone" "route53_domain" {
+  name = var.domain_name
+  tags = var.common_tags
+}
+
+resource "aws_route53_record" "domain_validate" {
+  for_each = {
+    for dvo in aws_acm_certificate.web_cert.domain_validation_options : dvo.domain_name => {
+      name   = dvo.resource_record_name
+      record = dvo.resource_record_value
+      type   = dvo.resource_record_type
+    }
+  }
+  allow_overwrite = true
+  zone_id  = aws_route53_zone.route53_domain.zone_id
+  name     = each.value.name
+  records  = [each.value.record]
+  type     = each.value.type
+  ttl	   = 300
+}
+
+resource "aws_route53_record" "cf-distro" {
+  for_each = aws_cloudfront_distribution.website-cf.aliases
+  zone_id  = aws_route53_zone.route53_domain.zone_id
+  name     = each.value
+  type     = "A"
+
+  alias {
+    name                   = aws_cloudfront_distribution.website-cf.domain_name
+    zone_id                = aws_cloudfront_distribution.website-cf.hosted_zone_id
+    evaluate_target_health = false
+  }
+}
