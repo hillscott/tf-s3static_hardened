@@ -1,7 +1,22 @@
 resource "aws_s3_bucket" "web_bucket" {
-  bucket = "${var.bucket_name}"
+  bucket = var.bucket_name
 
   tags = var.common_tags
+}
+resource "aws_s3_bucket_server_side_encryption_configuration" "s3_sse" {
+  bucket = aws_s3_bucket.web_bucket.id
+  rule {
+    bucket_key_enabled = true
+    apply_server_side_encryption_by_default {
+      sse_algorithm = "AES256"
+    }
+  }
+}
+resource "aws_s3_bucket_versioning" "s3_ver" {
+  bucket = aws_s3_bucket.web_bucket.id
+  versioning_configuration {
+    status = "Enabled"
+  }
 }
 data "aws_iam_policy_document" "allow_access_to_s3" {
   statement {
