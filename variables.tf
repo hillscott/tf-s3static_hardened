@@ -11,3 +11,7 @@ variable "bucket_name" {
 variable "common_tags" {
   description = "AWS tags you want applied to all components."
 }
+
+variable "alerts_email" {
+  description = "Where alerts regarding unusual actions in your AWS account should go."
+}
