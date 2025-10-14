@@ -27,9 +27,10 @@ At that point you are ready to clone this repository, and create your local envi
 
 * backend.tf
 * terraform.tfvars
-* tf-s3static_hardened-init.sh
-* tf-s3static_hardened-plan.sh
-* tf-s3static_hardened-apply.sh
+* (Optional) tf-s3static_hardened-init.sh
+* (Optional) tf-s3static_hardened-plan.sh
+* (Optional) tf-s3static_hardened-apply.sh
+If you don't want to create the tf-static_hardened-apply.sh, you will still need your environment variables to contain AWS_REGION at a minimum. It is assumed that you have already gone through and configured AWS credentials with `aws configure`
 
 Features that are coming soon:
 * Auto IAM Policy generation for an S3 upload user
