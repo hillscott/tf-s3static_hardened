@@ -52,8 +52,8 @@ resource "aws_s3_bucket_policy" "cf-policy" {
 }
 # Put a template index.html in the bucket
 resource "aws_s3_object" "file_upload" {
-  bucket 	= var.bucket_name
-  key 		= "index.html"
-  source 	= "index.html"
-  content_type 	= "text/html"
+  bucket       = var.bucket_name
+  key          = "index.html"
+  source       = "index.html"
+  content_type = "text/html"
 }

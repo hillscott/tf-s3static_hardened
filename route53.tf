@@ -25,11 +25,11 @@ resource "aws_route53_record" "domain_validate" {
     }
   }
   allow_overwrite = true
-  zone_id  = aws_route53_zone.route53_domain.zone_id
-  name     = each.value.name
-  records  = [each.value.record]
-  type     = each.value.type
-  ttl	   = 300
+  zone_id         = aws_route53_zone.route53_domain.zone_id
+  name            = each.value.name
+  records         = [each.value.record]
+  type            = each.value.type
+  ttl             = 300
 }
 
 resource "aws_route53_record" "cf-distro" {
