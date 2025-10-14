@@ -3,12 +3,12 @@ About
 This repository is used to create a full AWS static web stack using terraform. Typical costs run around $0.50USD/mo when using this stack.
 
 It Deploys a suite of AWS Services to provide you a secure hosting environment. These services include:
-* *Route53* (for DNS hosting of your domain)
-* *S3* (with no public access thanks to OAC - Origin Access Control and IAM Policies)
-* *ACM* (for encryption in-transit to viewers)
-* *Cloudfront* (which includes network level DDOS protection w/ AWS Shield and TLS 1.2 requirements)
-* *GuardDuty* (to secure your AWS account from unusual backend access attempts)
-* *SNS* (to alert you via email - should GuardDuty see something unusual)
+* **Route53** (for DNS hosting of your domain)
+* **S3** (with no public access thanks to OAC - Origin Access Control and IAM Policies)
+* **ACM** (for encryption in-transit to viewers)
+* **Cloudfront** (which includes network level DDOS protection w/ AWS Shield and TLS 1.2 requirements)
+* **GuardDuty** (to secure your AWS account from unusual backend access attempts)
+* **SNS** (to alert you via email - should GuardDuty see something unusual)
 
 Prep Work
 --
