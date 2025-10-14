@@ -8,3 +8,6 @@ Note that there are important files that you'll need to manually create per dire
 * tf-s3static_hardened-init.sh
 * tf-s3static_hardened-plan.sh
 * tf-s3static_hardened-apply.sh
+
+
+Additionally, there are some prep steps that must be taken in AWS prior to letting terraform take over. More docs coming on this...
