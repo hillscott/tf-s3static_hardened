@@ -35,3 +35,10 @@ resource "aws_s3_bucket_policy" "cf-policy" {
   bucket = aws_s3_bucket.web_bucket.bucket
   policy = data.aws_iam_policy_document.allow_access_to_s3.json
 }
+# Put a template index.html in the bucket
+resource "aws_s3_object" "file_upload" {
+  bucket 	= var.bucket_name
+  key 		= "index.html"
+  source 	= "index.html"
+  content_type 	= "text/html"
+}
