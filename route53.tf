@@ -3,7 +3,19 @@ resource "aws_route53_zone" "route53_domain" {
   name = var.domain_name
   tags = var.common_tags
 }
+resource "null_resource" "show_ns_servers" {
+  # Force the resource to run after the zone exists.
+  depends_on = [aws_route53_zone.route53_domain]
 
+  triggers = {
+    ns = join(",", aws_route53_zone.route53_domain.name_servers)
+  }
+
+  provisioner "local-exec" {
+    # Show the user what they need to do now that the zone exists...
+    command = "echo \"NOTICE!!!\"; echo \"NAME SERVERS:\"; echo \"${self.triggers.ns}\"; echo \"The Above Route53 Name Servers must now be set in your name registrar.\"; echo \"The deployment will continue once resolution succeeds.\""
+  }
+}
 resource "aws_route53_record" "domain_validate" {
   for_each = {
     for dvo in aws_acm_certificate.web_cert.domain_validation_options : dvo.domain_name => {
