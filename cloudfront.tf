@@ -25,16 +25,13 @@ resource "aws_cloudfront_distribution" "website-cf" {
     # Using the Managed-CachingOptimizedForUncompressedObjects Policy
     cache_policy_id        = "b2884449-e4de-46a7-ac36-70bc7f1ddd6d"
     target_origin_id       = aws_s3_bucket.web_bucket.id
-    min_ttl                = 0
-    default_ttl            = 14400
-    max_ttl                = 86400
     compress               = false
     viewer_protocol_policy = "redirect-to-https"
   }
   restrictions {
     geo_restriction {
       restriction_type = "none"
-      locations        = [""]
+      locations        = []
     }
   }
   viewer_certificate {
