@@ -1,10 +1,18 @@
 About
 --
-This repository is used to create a full AWS static web stack using terraform. Typical costs run ~$0.30-~$0.50USD/mo when using this stack.
+This repository is used to create a full AWS static web stack using terraform. Typical costs run around $0.50USD/mo when using this stack.
+
+It Deploys a suite of AWS Services to provide you a secure hosting environment. These services include:
+* *Route53* (for DNS hosting of your domain)
+* *S3* (with no public access thanks to OAC - Origin Access Control and IAM Policies)
+* *ACM* (for encryption in-transit to viewers)
+* *Cloudfront* (which includes network level DDOS protection w/ AWS Shield and TLS 1.2 requirements)
+* *GuardDuty* (to secure your AWS account from unusual backend access attempts)
+* *SNS* (to alert you via email - should GuardDuty see something unusual)
 
 Prep Work
 --
-More docs are coming, but at a high-level you will need to perform the following with ClickOps (via the graphical console):
+More docs are coming, but at a high-level you will need to perform the following with ClickOps (via the graphical console) BEFORE running this stack:
 * (Suggested) Create a fresh AWS Sub-Account via AWS Organizations
 * (Suggested) Create and apply the provided IAM Role policy to your admin user in your root account (see the reference/ folder)
 * (Suggested) Switch roles to the new account
@@ -23,8 +31,6 @@ At that point you are ready to clone this repository, and create your local envi
 * tf-s3static_hardened-plan.sh
 * tf-s3static_hardened-apply.sh
 
-
 Features that are coming soon:
-* GuardDuty + SNS Notifications
 * Auto IAM Policy generation for an S3 upload user
 * CloudTrail / CloudWatch / SNS notifications for certain security events
