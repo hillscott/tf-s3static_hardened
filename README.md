@@ -1,7 +1,20 @@
-In-Progress...
+About
 --
 
-Note that there are important files that you'll need to manually create per directions that will be posted here. These files are not tracked in the repository as they are installation specific. 
+Prep Work
+--
+More docs are coming, but at a high-level you will need to perform the following with ClickOps (via the graphical console):
+* (Suggested) Create a fresh AWS Sub-Account via AWS Organizations
+* (Suggested) Create and apply the provided IAM Role policy to your admin user in your root account (see the reference/ folder)
+* (Suggested) Switch roles to the new account
+* (Suggested) Create a new IAM admin user in that account
+* Login to the IAM admin user
+* Create an S3 Bucket for Terraform State named YOUR_DOMAIN-terraform
+* Apply the S3 Bucket Policy provided (see the reference/ folder)
+* Create a DynamoDB table named YOUR_DOMAIN-terraform-lock
+    * Partition Key: LockID [String]
+
+At that point you are ready to clone this repository, and create your local environment files. These files are installation specific, but there are examples available in the reference folder:
 
 * backend.tf
 * terraform.tfvars
@@ -9,8 +22,6 @@ Note that there are important files that you'll need to manually create per dire
 * tf-s3static_hardened-plan.sh
 * tf-s3static_hardened-apply.sh
 
-
-Additionally, there are some prep steps that must be taken in AWS prior to letting terraform take over. More docs coming on this...
 
 Features that are coming soon:
 * GuardDuty + SNS Notifications
