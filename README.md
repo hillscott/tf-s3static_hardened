@@ -1,5 +1,6 @@
 About
 --
+This repository is used to create a full AWS static web stack using terraform. Typical costs run ~$0.30-~$0.50USD/mo when using this stack.
 
 Prep Work
 --
