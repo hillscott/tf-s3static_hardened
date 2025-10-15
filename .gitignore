@@ -1,6 +1,6 @@
 terraform.tfvars
 terraform.tfstate
 terraform.tfstate.backup
-backend.tf
+backend.conf
 .terraform.lock.hcl
 tf-*.sh

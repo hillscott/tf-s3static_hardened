@@ -1,6 +1,5 @@
 # Terraform setup
-export TF_LOG="error"
-export TF_LOG_PATH="[home-dir]/terraform-data/tf-s3static_hardened/tf-log.txt"
+# Keep modules out of our git directory...
 export TF_DATA_DIR="[home-dir]/terraform-data/tf-s3static_hardened/tf-state"
 # If you are using a separate AWS configured profile
 export AWS_PROFILE="[profile-name]"
