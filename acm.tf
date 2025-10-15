@@ -5,6 +5,9 @@ resource "aws_acm_certificate" "web_cert" {
   subject_alternative_names = ["*.${var.domain_name}"]
   validation_method         = "DNS"
   tags                      = var.common_tags
+  lifecycle {
+    create_before_destroy = true
+  }
 }
 
 resource "aws_acm_certificate_validation" "cert_validation" {
