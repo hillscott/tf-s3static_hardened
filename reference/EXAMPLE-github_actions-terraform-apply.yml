@@ -1,0 +1,36 @@
+on:
+  workflow_dispatch: {}
+
+env:
+  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+jobs:
+  terraform:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: hashicorp/setup-terraform@v2
+      - run: |
+          TF_STATE_bucket_name="[YOUR-DOMAIN-HERE]-terraform"
+          TF_STATE_key="prod/terraform.tfstate"
+          TF_STATE_dynamodb_table="[YOUR-DOMAIN-HERE]-terraform-lock"
+          export AWS_REGION="[YOUR-AWS-REGION]"
+          DOMAIN_NAME="[YOUR-DOMAIN-NAME]"
+          BUCKET_NAME="[YOUR-DOMAIN-NAME]"
+          ALERTS_EMAIL="[EMAIL-ADDY-FOR-ALERTS]"
+          cat << BACKEND >backend.conf
+          bucket         = "$TF_STATE_bucket_name"
+          key            = "$TF_STATE_key"
+          dynamodb_table = "$TF_STATE_dynamodb_table"
+          BACKEND
+          cat << TFVARS >terraform.tfvars
+          domain_name    = "${DOMAIN_NAME}"
+          bucket_name    = "${BUCKET_NAME}"
+          alerts_email   = "${ALERTS_EMAIL}"
+          common_tags = {
+            Project = "${DOMAIN_NAME}"
+          }
+          TFVARS
+          terraform init -backend-config=backend.conf
+          terraform apply -auto-approve
