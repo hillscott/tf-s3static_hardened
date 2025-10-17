@@ -31,6 +31,7 @@ At that point you are ready to either:
 If you don't want to create the tf-static_hardened-apply.sh (or plan), you will still need your environment variables to contain AWS_REGION at a minimum. It is assumed that you have already gone through and configured AWS credentials with `aws configure`
 
 **OR**
+
 2. (Advanced) Use GitHub Actions (or another CI/CD pipeline). An example GitHub Action file is available here: [plan-template](./reference/EXAMPLE-github_actions-terraform-plan.yml) and [apply-template](./reference/EXAMPLE-github_actions-terraform-apply.yml)
 
 If you use GitHub Actions, you don't need a host to deploy your infrastructure at all. There are _many_ ways to do this, but one fairly simple one follows...: 
