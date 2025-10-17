@@ -23,9 +23,8 @@ More docs are coming, but at a high-level you will need to perform the following
 
 At that point you are ready to clone this repository, and create your local environment files. These files are installation specific, but there are examples available in the reference folder:
 
-* backend.tf
 * terraform.tfvars
-* tf-s3static_hardened-init.sh
+* tf-s3static_hardened-init.sh (this will build the necessary backend.conf and call it)
 * (Optional) tf-s3static_hardened-plan.sh
 * (Optional) tf-s3static_hardened-apply.sh
 
