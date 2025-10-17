@@ -9,9 +9,7 @@ To Configure Manually in AWS (High Level)
 
 To Create Locally
 --
-* .terraformrc
 * terraform.tfvars
-* backend.tf
 * tf-s3static_hardened-init.sh
-* tf-s3static_hardened-plan.sh
-* tf-s3static_hardened-apply.sh
+* (Optional) tf-s3static_hardened-plan.sh
+* (Optional) tf-s3static_hardened-apply.sh
