@@ -37,7 +37,7 @@ data "aws_iam_policy_document" "allow_access_to_s3" {
       variable = "AWS:SourceArn"
 
       values = [
-        aws_cloudfront_distribution.website-cf.arn
+        aws_cloudfront_distribution.website_cf.arn
       ]
     }
   }
@@ -46,7 +46,7 @@ data "aws_iam_policy_document" "allow_access_to_s3" {
     aws_s3_bucket.web_bucket
   ]
 }
-resource "aws_s3_bucket_policy" "cf-policy" {
+resource "aws_s3_bucket_policy" "cf_policy" {
   bucket = aws_s3_bucket.web_bucket.bucket
   policy = data.aws_iam_policy_document.allow_access_to_s3.json
 }

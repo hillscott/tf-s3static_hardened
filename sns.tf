@@ -8,6 +8,7 @@ resource "aws_sns_topic_subscription" "gduty_sub" {
   endpoint  = var.alerts_email
 }
 
+# tflint-ignore: terraform_required_providers
 resource "null_resource" "notify_subscription" {
   # Force the resource to run after the subscription confirmation goes out.
   depends_on = [aws_sns_topic_subscription.gduty_sub]

@@ -2,6 +2,7 @@ terraform {
   required_providers {
     aws = {
       source = "hashicorp/aws"
+      version = ">= 6.16.0"
     }
   }
   # Terraform S3-based state locking introduced in 1.11.0

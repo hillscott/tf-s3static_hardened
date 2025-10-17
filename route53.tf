@@ -3,6 +3,7 @@ resource "aws_route53_zone" "route53_domain" {
   name = var.domain_name
   tags = var.common_tags
 }
+# tflint-ignore: terraform_required_providers
 resource "null_resource" "show_ns_servers" {
   # Force the resource to run after the zone exists.
   depends_on = [aws_route53_zone.route53_domain]
@@ -32,15 +33,15 @@ resource "aws_route53_record" "domain_validate" {
   ttl             = 300
 }
 
-resource "aws_route53_record" "cf-distro" {
-  for_each = aws_cloudfront_distribution.website-cf.aliases
+resource "aws_route53_record" "cf_distro" {
+  for_each = aws_cloudfront_distribution.website_cf.aliases
   zone_id  = aws_route53_zone.route53_domain.zone_id
   name     = each.value
   type     = "A"
 
   alias {
-    name                   = aws_cloudfront_distribution.website-cf.domain_name
-    zone_id                = aws_cloudfront_distribution.website-cf.hosted_zone_id
+    name                   = aws_cloudfront_distribution.website_cf.domain_name
+    zone_id                = aws_cloudfront_distribution.website_cf.hosted_zone_id
     evaluate_target_health = false
   }
 }

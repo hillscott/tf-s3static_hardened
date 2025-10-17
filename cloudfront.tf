@@ -6,7 +6,7 @@ resource "aws_cloudfront_origin_access_control" "oac" {
   signing_protocol                  = "sigv4"
 }
 
-resource "aws_cloudfront_distribution" "website-cf" {
+resource "aws_cloudfront_distribution" "website_cf" {
   comment = var.domain_name
   origin {
     domain_name              = aws_s3_bucket.web_bucket.bucket_regional_domain_name
@@ -16,7 +16,7 @@ resource "aws_cloudfront_distribution" "website-cf" {
   enabled             = true
   is_ipv6_enabled     = true
   default_root_object = "index.html"
-  aliases             = ["${var.domain_name}", "www.${var.domain_name}"]
+  aliases             = [var.domain_name, "www.${var.domain_name}"]
   price_class         = var.price_class
   tags                = var.common_tags
   default_cache_behavior {
