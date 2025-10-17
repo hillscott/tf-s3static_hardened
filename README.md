@@ -49,3 +49,7 @@ Features that are coming soon:
 * Auto IAM Policy generation for an S3 upload user
 * CloudTrail / CloudWatch / SNS notifications for certain security events
 * Conversion to a module
+
+Graph of Resources
+--
+![terraform-graph](reference/tf-s3static_hardened.svg)
