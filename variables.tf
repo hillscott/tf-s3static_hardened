@@ -10,6 +10,7 @@ variable "bucket_name" {
 
 variable "common_tags" {
   description = "AWS tags you want applied to all components."
+  type	      = object({Project=string})
 }
 
 variable "alerts_email" {
