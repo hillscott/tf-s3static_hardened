@@ -14,7 +14,6 @@ jobs:
       - run: |
           TF_STATE_bucket_name="[YOUR-DOMAIN-HERE]-terraform"
           TF_STATE_key="prod/terraform.tfstate"
-          TF_STATE_dynamodb_table="[YOUR-DOMAIN-HERE]-terraform-lock"
           export AWS_REGION="[YOUR-AWS-REGION]"
           DOMAIN_NAME="[YOUR-DOMAIN-NAME]"
           BUCKET_NAME="[YOUR-DOMAIN-NAME]"
@@ -22,7 +21,6 @@ jobs:
           cat << BACKEND >backend.conf
           bucket         = "$TF_STATE_bucket_name"
           key            = "$TF_STATE_key"
-          dynamodb_table = "$TF_STATE_dynamodb_table"
           BACKEND
           cat << TFVARS >terraform.tfvars
           domain_name    = "${DOMAIN_NAME}"

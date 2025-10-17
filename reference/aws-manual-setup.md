@@ -6,8 +6,6 @@ To Configure Manually in AWS (High Level)
 * Create a new IAM admin user in that account
 * Create an S3 Bucket for Terraform State named YOUR_DOMAIN-terraform
 * Apply the S3 Bucket Policy provided in references
-* Create a DynamoDB table named YOUR_DOMAIN-terraform-lock
-    * Partition Key: LockID [String]
 
 To Create Locally
 --

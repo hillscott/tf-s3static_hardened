@@ -1,6 +1,6 @@
 About
 --
-This repository is used to create a full AWS static web stack using terraform. Typical costs run around $0.50USD/mo when using this stack.
+This repository is used to create a full AWS static web stack using terraform. Typical costs run around $1.00USD/mo (depending on usage) when using this stack.
 
 It Deploys a suite of AWS Services to provide you a secure hosting environment. These services include:
 * **Route53** (for DNS hosting of your domain)
@@ -20,8 +20,6 @@ More docs are coming, but at a high-level you will need to perform the following
 * Login to the IAM admin user
 * Create an S3 Bucket for Terraform State named YOUR_DOMAIN-terraform
 * Apply the S3 Bucket Policy provided (see the reference/ folder)
-* Create a DynamoDB table named YOUR_DOMAIN-terraform-lock
-    * Partition Key: LockID [String]
 
 At that point you are ready to clone this repository, and create your local environment files. These files are installation specific, but there are examples available in the reference folder:
 
