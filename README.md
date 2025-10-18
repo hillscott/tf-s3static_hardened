@@ -10,6 +10,12 @@ It Deploys a suite of AWS Services to provide you a secure hosting environment. 
 * **GuardDuty** (to secure your AWS account from unusual backend access attempts)
 * **SNS** (to alert you via email - should GuardDuty see something unusual)
 
+Assumptions
+--
+* You have a folder of static files (HTML, CSS, JavaScript...) that you want to host with unlimited scale for viewers at barely any cost with _little_ to worry about from a security standpoint.
+* You own a domain that you want to host the content on. **NOTE** If this domain is currently in-use with a different hosting provider, you'll obviously want to make sure that you modify the s3_upload block to get your web content in there. You may also need to add additional DNS entries into Route53 through the route53.tf file.
+* You are comfortable following technical directions and know some git basics.
+
 Prep Work
 --
 More docs are coming, but at a high-level you will need to perform the following with ClickOps (via the graphical console) BEFORE running this stack:
@@ -27,6 +33,7 @@ At that point you are ready to either:
 * tf-s3static_hardened-init.sh (this will build the necessary backend.conf and call it)
 * (Optional) tf-s3static_hardened-plan.sh
 * (Optional) tf-s3static_hardened-apply.sh
+* (Optional) Some content to host - You can change the s3.tf file "s3_upload" block to fit your needs. This is where a simple test index.html file gets uploaded. 
 
 If you don't want to create the tf-static_hardened-apply.sh (or plan), you will still need your environment variables to contain AWS_REGION at a minimum. It is assumed that you have already gone through and configured AWS credentials with `aws configure`
 
@@ -44,11 +51,21 @@ If you use GitHub Actions, you don't need a host to deploy your infrastructure a
 
 You _can_ modify the GitHub templates to trigger on commit obviously (the main point to CI/CD), but I will leave that to you. Tread carefully. 
 
+Post-Setup
+--
+Once your domain is up and running, you'll obviously need to work on a way to update the content. This can be done with a simple script that does an S3 sync up to your bucket. 
+
+Something to bear in mind... While you can create a ```terraform destroy``` workflow or shell script, This _will_ fail unless you manually clear the S3 bucket contents prior to doing so. This can technically be forced with Terraform, but I've deliberately avoided doing that for safety reasons.
+
+Once you have your upload workflow working, you might want to consider removing any * level (administrator) access API keys used to set this up. You could also use the IAM policy advisor to lock it down, but 0 access is even better (if you don't need it). 
+
 Features that are coming soon:
 --
-* Auto IAM Policy generation for an S3 upload user
+* Role-based IAM options (to avoid having ANY IAM accounts in your web hosting console)
 * CloudTrail / CloudWatch / SNS notifications for certain security events
 * Conversion to a module
+* Example S3 Sync scripts
+* Docs on how to Issue an Invalidation to CloudFront via ClickOps (Web Interface) or CLI
 
 Graph of Resources
 --
