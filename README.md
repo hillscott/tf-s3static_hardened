@@ -14,6 +14,7 @@ Assumptions
 --
 * You have a folder of static files (HTML, CSS, JavaScript...) that you want to host with unlimited scale for viewers at barely any cost with _little_ to worry about from a security standpoint.
 * You own a domain that you want to host the content on. **NOTE** If this domain is currently in-use with a different hosting provider, you'll obviously want to make sure that you modify the s3_upload block to get your web content in there. You may also need to add additional DNS entries into Route53 through the route53.tf file.
+  * It is possible to go through the domain registration itself with Route53. This script doesn't currently do that. Maintaining some separation between the registrar and server environment has security benefits. If you have a need to dynamically register domains, you certainly could modify this stack to do so though.
 * You are comfortable following technical directions and know some git basics.
 
 Prep Work
@@ -61,6 +62,7 @@ Once you have your upload workflow working, you might want to consider removing 
 
 Features that are coming soon:
 --
+* DNSSEC
 * Role-based IAM options (to avoid having ANY IAM accounts in your web hosting console)
 * CloudTrail / CloudWatch / SNS notifications for certain security events
 * Conversion to a module
